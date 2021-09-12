@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+</head>
+<body>
+
+
+<style>
+
+
+
+
+.container {
+  margin: auto;
+  width: 20%;
+}
+
+.badge {
+    background-color: #;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    padding: 3px 7px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.shopping-cart {
+  margin: 20px 0;
+  float: right;
+  background: white;
+  width: 340px;
+  position: relative;
+  border-radius: 3px;
+  padding: 20px;
+
+
+  .shopping-cart-header {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 15px;
+
+    .shopping-cart-total {
+      float: right;
+    }
+  }
+
+  .shopping-cart-items {
+
+    padding-top: 20px;
+
+      li {
+        margin-bottom: 18px;
+      }
+
+    img {
+      float: left;
+      margin-right: 12px;
+    }
+
+    .item-name {
+      display: block;
+      padding-top: 10px;
+      font-size: 16px;
+    }
+
+    .item-price {
+      color: blue;
+      margin-right: 8px;
+    }
+
+    .item-quantity {
+      color: black;
+    }
+  }
+
+}
+
+
+.shopping-cart:after {
+	bottom: 100%;
+	left: 89%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-bottom-color: white;
+	border-width: 8px;
+	margin-left: -8px;
+}
+
+.cart-icon {
+  color: #515783;
+  font-size: 24px;
+  margin-left: 7px;
+  float: right;
+}
+
+.button {
+  background: $main-color;
+  color:white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  display: block;
+  border-radius: 3px;
+  font-size: 16px;
+  margin: 25px 0 1px 0;
+
+  &:hover {
+    background: black;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+	span {cursor:pointer; }
+		.number{
+			margin:1px;
+		}
+		.minus, .plus{
+			width:20px;
+			height:20px;
+			background:#f2f2f2;
+			border-radius:4px;
+			padding:0px 3px 0px 3px;
+			border:1px solid #ddd;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+		}
+		input{
+			height:20px;
+      width: 40px;
+      text-align: center;
+      font-size: 12px;
+			border:1px solid #ddd;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+
+
+
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- Banner Ends Here -->
+
+<div class="container">
+  <div class="shopping-cart">
+    <div class="shopping-cart-header" style="text-align:right" >
+
+     <a href="#"> <span class="fa fa-shopping-cart" style="font-size:24px"> </span><b> {{itc}}</b></a></div>
+
+
+      <span class="lighter-text" style="color:black"><h3><b>MY CART</b></h3></span>
+
+      <div class="shopping-cart-total">
+        <span class="lighter-text" style="color:black"><b>Total:</b></span>
+        <span class="main-color-text" style="color:black"><b>{{t}}Rs</b></span>
+
+    </div> <!--end shopping-cart-header -->
+{% for i in ci %}
+    <ul class="shopping-cart-items">
+      <li class="clearfix">
+        <h3><a href="{{i.prodt.get_url}}"><b>{{i.prodt.name}}</b></a></h3>
+        <a href="{% url 'remove' i.prodt.id %}"> <i class="fa fa-trash-o" style="font-size:26px"></i></a> &nbsp;
+         <a href="{{i.prodt.get_url}}"> <img src="{{i.prodt.img.url}}" alt="{{i.prodt.name}}" style="height:100;width:100; /> &nbsp;</a>
+
+        <span class="lighter-text" style="color:black"><b>  Price:{{i.total}}Rs</b></span><br>
+      </li></ul>
+      <div class="number">
+        <span class="minus"><a href="{% url 'cart_decrement' i.prodt.id %}"> - </span></a>
+	<input type="text"  value="{{i.quan}}"/>
+	<span class="plus"><a href="{% url 'addcart' i.prodt.id %}"> + </span></a>
+    {% endfor %}
+  </div>
+
+    <!-- Featured Starts Here -->
+
+<!--    <script src="{% static 'cr/vendor/jquery/jquery.min.js' %}"></script>-->
+<!--    <script src="{% static 'cr/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>--
+
+   &lt;!&ndash; Additional Scripts &ndash;&gt;-->
+<!--    <script src="{% static 'cr/assets/js/custom.js' %}"></script>-->
+<!--    <script src="{% static 'cr/assets/js/owl.js' %}"></script>-->
+</body>
+
+</html>
+{% endblock %}
